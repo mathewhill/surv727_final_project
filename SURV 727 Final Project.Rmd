@@ -34,7 +34,16 @@ interest_clean <- interest_over_time %>%
   mutate(hits = as.numeric(hits)) %>%
   filter(!is.na(hits))
 
-
+```{r}
+ggplot(abortion_combined_data, aes(x = white_pct, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs White Population Percentage",
+       x = "White Population Percentage",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
 fl_gender_demo <- data.frame(
   county = c("Miami-Dade", "Orange", "Duval", "Leon"),
   women_reproductive_age_pct = c(25, 22, 20, 24)
