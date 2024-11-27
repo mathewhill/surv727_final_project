@@ -5,6 +5,8 @@ date: "2024-11-25"
 output: pdf_document
 ---
 
+GitHub link: https://github.com/mathewhill/surv727_final_project
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
