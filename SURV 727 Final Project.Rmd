@@ -151,3 +151,12 @@ acs_fl <- acs_fl %>%
   )
 ```
 
+```{r}
+acs_fl <- acs_fl %>%
+  mutate(location = sub(", Florida", "", NAME)) %>%
+  mutate(location = trimws(location)) #extracting city names without the state into its own column
+
+head(acs_fl)
+```
+
+
