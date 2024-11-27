@@ -159,4 +159,15 @@ acs_fl <- acs_fl %>%
 head(acs_fl)
 ```
 
+```{r}
+pattern <- " (village|city|town|CDP)$" #removing these endings to cities 
+
+acs_fl_clean <- acs_fl %>%
+  mutate(location = gsub(pattern, "", location, ignore.case = TRUE))
+#removing above endings for the ACS data
+
+head(acs_fl_clean)
+```
+
+
 
