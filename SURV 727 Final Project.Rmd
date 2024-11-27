@@ -53,6 +53,14 @@ ggplot(interest_clean, aes(x = date, y = hits, color = keyword)) +
 full_df <- data.frame(trends_data$interest_over_time) 
 ```
 
+```{r}
+city_df <- data.frame(trends_data$interest_by_city)
 
+abortion_filtered_city_df <- city_df %>%
+  filter(keyword == "abortion") #abortion df with cities
+
+roe_v_wade_filtered_city_df <- city_df %>%
+  filter(keyword == "roe v wade") #roe v wade df with cities
+```
 
 
