@@ -63,4 +63,13 @@ roe_v_wade_filtered_city_df <- city_df %>%
   filter(keyword == "roe v wade") #roe v wade df with cities
 ```
 
+```{r}
+cs_key <- trimws(read_file("C:/Users/mathe/OneDrive/Documents/census-key.txt"))
+#Reading API key from .txt file
+
+census_api_key(cs_key)
+```
+
+
+
 
