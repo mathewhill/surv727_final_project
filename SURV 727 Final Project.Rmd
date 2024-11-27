@@ -239,3 +239,16 @@ ggplot(abortion_combined_data, aes(x = black_pct, y = hits)) +
        color = "Country") +
   theme_minimal()
 ```
+
+```{r}
+ggplot(abortion_combined_data, aes(x = white_pct, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs White Population Percentage",
+       x = "White Population Percentage",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
+
+
