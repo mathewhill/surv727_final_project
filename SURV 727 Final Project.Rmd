@@ -169,5 +169,64 @@ acs_fl_clean <- acs_fl %>%
 head(acs_fl_clean)
 ```
 
+```{r}
+abortion_combined_data <- acs_fl_clean %>%
+  inner_join(abortion_filtered_city_df, by = "location") #combining two data frames
+head(abortion_combined_data)
+```
 
+```{r}
+roe_v_wade_combined_data <- acs_fl_clean %>%
+  inner_join(roe_v_wade_filtered_city_df, by = "location") #combining two data frames
+head(roe_v_wade_combined_data)
+```
 
+```{r}
+# Remove rows where 'hits' is NA
+abortion_combined_data <- abortion_combined_data[!is.na(abortion_combined_data$hits), ]
+roe_v_wade_combined_data <- roe_v_wade_combined_data[!is.na(roe_v_wade_combined_data$hits), ]
+```
+
+```{r}
+ggplot(abortion_combined_data, aes(x = age, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs Age",
+       x = "Average Age",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(roe_v_wade_combined_data, aes(x = age, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs Age",
+       x = "Average Age",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(abortion_combined_data, aes(x = hh_income, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs Household Income",
+       x = "Household Income",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
+
+```{r}
+ggplot(abortion_combined_data, aes(x = black_pct, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs Black Population Percentage",
+       x = "Black Population Percentage",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
