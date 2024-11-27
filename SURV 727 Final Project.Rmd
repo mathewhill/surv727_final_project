@@ -48,3 +48,11 @@ ggplot(interest_clean, aes(x = date, y = hits, color = keyword)) +
        color = "Search Term") +
   theme_minimal()
 ```
+
+```{r}
+full_df <- data.frame(trends_data$interest_over_time) 
+```
+
+
+
+
