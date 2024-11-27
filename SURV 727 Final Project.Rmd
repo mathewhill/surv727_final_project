@@ -251,4 +251,14 @@ ggplot(abortion_combined_data, aes(x = white_pct, y = hits)) +
   theme_minimal()
 ```
 
+```{r}
+ggplot(abortion_combined_data, aes(x = asian_pct, y = hits)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Hits vs Asian Population Percentage",
+       x = "Asian Population Percentage",
+       y = "Hits",
+       color = "Country") +
+  theme_minimal()
+```
 
