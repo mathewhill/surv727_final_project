@@ -121,4 +121,21 @@ acs_fl <- acs_fl %>%
 head(acs_fl)
 ```
 
+```{r}
+acs_fl <- acs_fl %>%
+  mutate(
+    female_pct = (female / pop) * 100,
+    white_pct = (white / pop) * 100,
+    black_pct = (black / pop) * 100,
+    native_american_pct = (native_american / pop) * 100,
+    asian_pct = (asian / pop) * 100,
+    pacific_islander_pct = (pacific_islander / pop) * 100,
+    other_race_pct = (other_race / pop) * 100,
+    two_or_more_pct = (two_or_more / pop) * 100
+  )
+
+head(acs_fl)
+```
+
+
 
