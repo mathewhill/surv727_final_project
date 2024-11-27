@@ -18,5 +18,33 @@ library(ggplot2)
 library(dplyr)
 ```
 
+```{r}
+search_terms <- c("abortion", "abortion pill", "murder")
+timeframe <- "2022-01-01 2022-12-31"
 
 
+trends_data <- gtrends(keyword = search_terms, time = timeframe, geo = "US-FL")
+```
+
+```{r}
+interest_over_time <- trends_data$interest_over_time
+
+interest_clean <- interest_over_time %>%
+  select(date, keyword, hits) %>%
+  mutate(hits = as.numeric(hits)) %>%
+  filter(!is.na(hits))
+
+
+fl_gender_demo <- data.frame(
+  county = c("Miami-Dade", "Orange", "Duval", "Leon"),
+  women_reproductive_age_pct = c(25, 22, 20, 24)
+)
+
+ggplot(interest_clean, aes(x = date, y = hits, color = keyword)) +
+  geom_line(linewidth = 1) +
+  labs(title = "Abortion-Related Search Trends in Florida",
+       subtitle = "Analyzing Gender-Driven Topics Through Proxy Data",
+       x = "Date", y = "Search Interest",
+       color = "Search Term") +
+  theme_minimal()
+```
