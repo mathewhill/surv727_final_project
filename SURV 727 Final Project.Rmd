@@ -137,5 +137,17 @@ acs_fl <- acs_fl %>%
 head(acs_fl)
 ```
 
-
+```{r}
+acs_fl <- acs_fl %>%
+  mutate(
+    female_pct = ifelse(pop > 0, (female / pop) * 100, NA),
+    white_pct = ifelse(pop > 0, (white / pop) * 100, NA),
+    black_pct = ifelse(pop > 0, (black / pop) * 100, NA),
+    native_american_pct = ifelse(pop > 0, (native_american / pop) * 100, NA),
+    asian_pct = ifelse(pop > 0, (asian / pop) * 100, NA),
+    pacific_islander_pct = ifelse(pop > 0, (pacific_islander / pop) * 100, NA),
+    other_race_pct = ifelse(pop > 0, (other_race / pop) * 100, NA),
+    two_or_more_pct = ifelse(pop > 0, (two_or_more / pop) * 100, NA)
+  )
+```
 
