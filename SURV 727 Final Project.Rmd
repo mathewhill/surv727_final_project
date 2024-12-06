@@ -247,7 +247,7 @@ roe_v_wade_combined_data <- roe_v_wade_combined_data[!is.na(roe_v_wade_combined_
 ggplot(abortion_combined_data, aes(x = age, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Hits vs Age",
+  labs(title = "Abortion Search in Cities by Average Age",
        x = "Average Age",
        y = "Hits",
        color = "Country") +
@@ -258,7 +258,7 @@ ggplot(abortion_combined_data, aes(x = age, y = hits)) +
 ggplot(abortion_combined_data, aes(x = hh_income, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Hits vs Household Income",
+  labs(title = "Abortion Search in Cities by Household Income",
        x = "Household Income",
        y = "Hits",
        color = "Country") +
@@ -269,7 +269,7 @@ ggplot(abortion_combined_data, aes(x = hh_income, y = hits)) +
 ggplot(abortion_combined_data, aes(x = black_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Hits vs Black Population Percentage",
+  labs(title = "Abortion Search in Cities by Black Population Percentage",
        x = "Black Population Percentage",
        y = "Hits",
        color = "Country") +
@@ -280,7 +280,7 @@ ggplot(abortion_combined_data, aes(x = black_pct, y = hits)) +
 ggplot(abortion_combined_data, aes(x = white_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Hits vs White Population Percentage",
+  labs(title = "Abortion Search in Cities by White Population Percentage",
        x = "White Population Percentage",
        y = "Hits",
        color = "Country") +
@@ -291,7 +291,7 @@ ggplot(abortion_combined_data, aes(x = white_pct, y = hits)) +
 ggplot(abortion_combined_data, aes(x = asian_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Hits vs Asian Population Percentage",
+  labs(title = "Abortion Search in Cities by Asian Population Percentage",
        x = "Asian Population Percentage",
        y = "Hits",
        color = "Country") +
@@ -302,7 +302,7 @@ ggplot(abortion_combined_data, aes(x = asian_pct, y = hits)) +
 ggplot(abortion_combined_data, aes(x = female_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Hits vs Female Population Percentage",
+  labs(title = "Abortion Search in Cities by Female Population Percentage",
        x = "Female Population Percentage",
        y = "Hits",
        color = "Country") +
