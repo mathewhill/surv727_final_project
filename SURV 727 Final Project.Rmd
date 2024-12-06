@@ -96,13 +96,13 @@ abortion_filtered_city_df <- combined_city_data %>%
   filter(keyword == "abortion") #abortion df with cities
 
 abortion_pill_filtered_city_df <- combined_city_data %>%
-  filter(keyword == "abortion pill") #murder df with cities
+  filter(keyword == "abortion pill") #abortion df with cities
 
 murder_filtered_city_df <- combined_city_data %>%
   filter(keyword == "murder") #murder df with cities
 
 roe_v_wade_filtered_city_df <- combined_city_data %>%
-  filter(keyword == "roe v wade") #murder df with cities
+  filter(keyword == "roe v wade") #roe v wade df with cities
 ```
 
 ```{r}
@@ -228,6 +228,7 @@ murder_combined_data <- acs_fl_clean %>%
   inner_join(murder_filtered_city_df, by = "location") #combining two data frames
 head(murder_combined_data)
 ```
+
 ```{r}
 roe_v_wade_combined_data <- acs_fl_clean %>%
   inner_join(roe_v_wade_filtered_city_df, by = "location") #combining two data frames
