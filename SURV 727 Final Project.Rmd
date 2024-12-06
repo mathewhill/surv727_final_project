@@ -54,26 +54,24 @@ head(combined_city_data)
 ```
 
 ```{r}
-# Ensure hits column is numeric in both data frames
+low_volume_interest <- trends_low_volume$interest_over_time
+high_volume_interest <- trends_high_volume$interest_over_time
+
 low_volume_interest <- low_volume_interest %>%
   mutate(hits = as.numeric(hits)) %>%
-  filter(keyword != "abortion") # Exclude abortion for low-volume results
+  filter(keyword != "abortion") 
 
 high_volume_interest <- high_volume_interest %>%
   mutate(hits = as.numeric(hits)) %>%
-  filter(keyword == "abortion") # Include only abortion for high-volume results
+  filter(keyword == "abortion") 
 
-# Combine the cleaned interest_over_time data
 combined_interest_data <- bind_rows(low_volume_interest, high_volume_interest)
 
-# Clean and filter combined data
 interest_clean <- combined_interest_data %>%
   select(date, keyword, hits) %>%
-  filter(!is.na(hits)) # Remove rows with NA hits
+  filter(!is.na(hits)) 
 
-# View the cleaned data
 head(interest_clean)
-
 ```
 
 ```{r}
