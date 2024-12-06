@@ -21,49 +21,90 @@ library(dplyr)
 ```
 
 ```{r}
-search_terms <- c("abortion", "abortion pill", "murder")
 timeframe <- "2022-01-01 2022-12-31"
-
-
-trends_data <- gtrends(keyword = search_terms, time = timeframe, geo = "US-FL")
 ```
 
 ```{r}
-interest_over_time <- trends_data$interest_over_time
+trends_low_volume <- gtrends(
+  keyword = c("abortion", "abortion pill", "murder", "roe v wade"),
+  time = timeframe,
+  geo = "US-FL",
+  low_search_volume = TRUE
+) #using low_search_volume = TRUE for "abortion pill", "murder", "roe v wade"
+```
 
-interest_clean <- interest_over_time %>%
+```{r}
+trends_high_volume <- gtrends(
+  keyword = c("abortion", "abortion pill", "murder"),
+  time = timeframe,
+  geo = "US-FL"
+) #Using low_search_volume = FALSE for "abortion"
+```
+
+```{r}
+city_df_low <- trends_low_volume$interest_by_city %>%
+  filter(keyword != "abortion") #excluding abortion from the low search volume df
+
+city_df_high <- trends_high_volume$interest_by_city %>%
+  filter(keyword == "abortion") #including only abortion in the high search volume df
+
+combined_city_data <- bind_rows(city_df_low, city_df_high)
+
+head(combined_city_data)
+```
+
+```{r}
+# Ensure hits column is numeric in both data frames
+low_volume_interest <- low_volume_interest %>%
+  mutate(hits = as.numeric(hits)) %>%
+  filter(keyword != "abortion") # Exclude abortion for low-volume results
+
+high_volume_interest <- high_volume_interest %>%
+  mutate(hits = as.numeric(hits)) %>%
+  filter(keyword == "abortion") # Include only abortion for high-volume results
+
+# Combine the cleaned interest_over_time data
+combined_interest_data <- bind_rows(low_volume_interest, high_volume_interest)
+
+# Clean and filter combined data
+interest_clean <- combined_interest_data %>%
+  select(date, keyword, hits) %>%
+  filter(!is.na(hits)) # Remove rows with NA hits
+
+# View the cleaned data
+head(interest_clean)
+
+```
+
+```{r}
+interest_clean <- combined_interest_data %>%
   select(date, keyword, hits) %>%
   mutate(hits = as.numeric(hits)) %>%
   filter(!is.na(hits))
-```
-
-```{r}
-fl_gender_demo <- data.frame(
-  county = c("Miami-Dade", "Orange", "Duval", "Leon"),
-  women_reproductive_age_pct = c(25, 22, 20, 24)
-)
 
 ggplot(interest_clean, aes(x = date, y = hits, color = keyword)) +
   geom_line(linewidth = 1) +
-  labs(title = "Abortion-Related Search Trends in Florida",
-       subtitle = "Analyzing Gender-Driven Topics Through Proxy Data",
-       x = "Date", y = "Search Interest",
-       color = "Search Term") +
+  labs(
+    title = "Search Trends for Abortion and Related Terms",
+    x = "Date", y = "Search Interest",
+    color = "Search Term"
+  ) +
   theme_minimal()
+
 ```
 
 ```{r}
-full_df <- data.frame(trends_data$interest_over_time) 
-```
-
-```{r}
-city_df <- data.frame(trends_data$interest_by_city)
-
-abortion_filtered_city_df <- city_df %>%
+abortion_filtered_city_df <- combined_city_data %>%
   filter(keyword == "abortion") #abortion df with cities
 
-roe_v_wade_filtered_city_df <- city_df %>%
-  filter(keyword == "roe v wade") #roe v wade df with cities
+abortion_pill_filtered_city_df <- combined_city_data %>%
+  filter(keyword == "abortion pill") #murder df with cities
+
+murder_filtered_city_df <- combined_city_data %>%
+  filter(keyword == "murder") #murder df with cities
+
+roe_v_wade_filtered_city_df <- combined_city_data %>%
+  filter(keyword == "roe v wade") #murder df with cities
 ```
 
 ```{r}
