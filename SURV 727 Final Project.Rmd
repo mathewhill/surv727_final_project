@@ -35,7 +35,7 @@ trends_low_volume <- gtrends(
 
 ```{r}
 trends_high_volume <- gtrends(
-  keyword = "abortion",
+  keyword = c("abortion", "abortion pill", "roe v wade"),
   time = timeframe,
   geo = "US-FL"
 ) #Using low_search_volume = FALSE for "abortion"
@@ -45,9 +45,9 @@ trends_high_volume <- gtrends(
 city_df_low <- trends_low_volume$interest_by_city %>%
   filter(keyword != "abortion") #excluding abortion from the low search volume df
 
-city_df_high <- trends_high_volume$interest_by_city 
+city_df_high <- trends_high_volume$interest_by_city %>%
+  filter(keyword == "abortion")
   
-
 combined_city_data <- bind_rows(city_df_low, city_df_high)
 
 head(combined_city_data)
