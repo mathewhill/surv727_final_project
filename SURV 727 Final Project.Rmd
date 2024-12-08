@@ -35,7 +35,7 @@ trends_low_volume <- gtrends(
 
 ```{r}
 trends_high_volume <- gtrends(
-  keyword = c("abortion", "abortion pill", "murder"),
+  keyword = "abortion",
   time = timeframe,
   geo = "US-FL"
 ) #Using low_search_volume = FALSE for "abortion"
@@ -45,8 +45,8 @@ trends_high_volume <- gtrends(
 city_df_low <- trends_low_volume$interest_by_city %>%
   filter(keyword != "abortion") #excluding abortion from the low search volume df
 
-city_df_high <- trends_high_volume$interest_by_city %>%
-  filter(keyword == "abortion") #including only abortion in the high search volume df
+city_df_high <- trends_high_volume$interest_by_city 
+  
 
 combined_city_data <- bind_rows(city_df_low, city_df_high)
 
@@ -378,7 +378,7 @@ ggplot(abortion_pill_combined_data, aes(x = female_pct, y = hits)) +
 ggplot(roe_v_wade_combined_data, aes(x = age, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Abortion Pill Search in Cities by Average Age",
+  labs(title = "Roe V Wade Search in Cities by Average Age",
        x = "Average Age",
        y = "Hits",
        color = "Country") +
@@ -389,7 +389,7 @@ ggplot(roe_v_wade_combined_data, aes(x = age, y = hits)) +
 ggplot(roe_v_wade_combined_data, aes(x = hh_income, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Abortion Pill Search in Cities by Household Income",
+  labs(title = "Roe V Wade Search in Cities by Household Income",
        x = "Household Income",
        y = "Hits",
        color = "Country") +
@@ -400,7 +400,7 @@ ggplot(roe_v_wade_combined_data, aes(x = hh_income, y = hits)) +
 ggplot(roe_v_wade_combined_data, aes(x = black_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Abortion Pill Search in Cities by Black Population Percentage",
+  labs(title = "Roe V Wade Search in Cities by Black Population Percentage",
        x = "Black Population Percentage",
        y = "Hits",
        color = "Country") +
@@ -411,7 +411,7 @@ ggplot(roe_v_wade_combined_data, aes(x = black_pct, y = hits)) +
 ggplot(roe_v_wade_combined_data, aes(x = white_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Abortion Pill Search in Cities by White Population Percentage",
+  labs(title = "Roe V Wade Search in Cities by White Population Percentage",
        x = "White Population Percentage",
        y = "Hits",
        color = "Country") +
@@ -422,7 +422,7 @@ ggplot(roe_v_wade_combined_data, aes(x = white_pct, y = hits)) +
 ggplot(roe_v_wade_combined_data, aes(x = asian_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Abortion Pill Search in Cities by Asian Population Percentage",
+  labs(title = "Roe V Wade Search in Cities by Asian Population Percentage",
        x = "Asian Population Percentage",
        y = "Hits",
        color = "Country") +
@@ -433,7 +433,7 @@ ggplot(roe_v_wade_combined_data, aes(x = asian_pct, y = hits)) +
 ggplot(roe_v_wade_combined_data, aes(x = female_pct, y = hits)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Abortion Pill Search in Cities by Female Population Percentage",
+  labs(title = "Roe V Wade Search in Cities by Female Population Percentage",
        x = "Female Population Percentage",
        y = "Hits",
        color = "Country") +
